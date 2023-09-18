@@ -21,7 +21,7 @@ class api {
     this.token = token;
   }
 
-  checkToken() {
+  checkToken(navigation) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(`${apiURL}/user/signin_token`, {
@@ -36,6 +36,9 @@ class api {
             Authorization: `JWT ${this.token}`,
           },
         });
+        if (response.status === 401) {
+          this.goToAuth(navigation);
+        }
         const res = await response.json();
         resolve(res);
       } catch (e) {
@@ -61,10 +64,7 @@ class api {
           },
         });
         if (response.status === 401) {
-          if (navigation?.route?.name !== "Auth") {
-            navigation.navigate("Auth", { disconnected: 1 });
-            return;
-          }
+          this.goToAuth(navigation);
         }
         const res = await response.json();
         resolve(res);
@@ -91,10 +91,7 @@ class api {
           body: typeof body === "string" ? body : JSON.stringify(body),
         });
         if (response.status === 401) {
-          if (navigation?.route?.name !== "Auth") {
-            navigation.navigate("Auth", { disconnected: 1 });
-            return;
-          }
+          this.goToAuth(navigation);
         }
         const res = await response.json();
         resolve(res);
@@ -120,10 +117,7 @@ class api {
           },
         });
         if (response.status === 401) {
-          if (navigation?.route?.name !== "Auth") {
-            navigation.navigate("Auth", { disconnected: 1 });
-            return;
-          }
+          this.goToAuth(navigation);
         }
         const res = await response.json();
         resolve(res);
@@ -150,10 +144,7 @@ class api {
           body: typeof body === "string" ? body : JSON.stringify(body),
         });
         if (response.status === 401) {
-          if (navigation?.route?.name !== "Auth") {
-            navigation.navigate("Auth", { disconnected: 1 });
-            return;
-          }
+          this.goToAuth(navigation);
         }
         const res = await response.json();
         if (response.status !== 200) {

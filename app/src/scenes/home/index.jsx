@@ -32,27 +32,25 @@ export default function Home() {
     }
   };
 
-  const getUser = async () => {
-    async function fetchData() {
+  const getUser = async (navigation) => {
       try {
-        const res = await api.checkToken();
+        const res = await api.checkToken(navigation);
         if (!res.ok || !res.user) {
+          console.log('res',res);
           api.setToken(null);
           dispatch(setUser(null));
-          return;
+          navigation.navigate("Auth")
         }
         if (res.token) api.setToken(res.token);
         if (res.user) dispatch(setUser(res.user));
       } catch (e) {
         console.log(e);
       }
-    }
-    fetchData();
   };
 
   useEffect(() => {
     getMessage();
-    getUser();
+    getUser(navigation);
   }, []);
   console.log('user',user);
   console.log(data);
