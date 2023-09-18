@@ -1,6 +1,5 @@
 const UserModel = require("../models/user");
 const AdminModel = require("../models/admin");
-const passwordValidator = require("password-validator");
 const Joi = require("joi");
 
 function isUser(user) {

@@ -13,10 +13,8 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Signup() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [newUser, setNewUser] = useState(null);
 
   const user = useSelector((state) => state.Auth.user);
-  if (user) return navigation.navigate("Home");
 
   const regexPhoneFrenchCountries = /^((00|\+)(33|590|594|262|596|269|687|689|508|681)|0)[1-9]?(\d{8})$/;
 
@@ -25,13 +23,7 @@ export default function Signup() {
   };
 
   return (
-    <div>
-      {newUser ? (
-        <Modal visible={newUser} transparent animationType="slide">
-          <Text>Utilisateur et structure créés avec succès.</Text>
-          <Button title="Continuer" onPress={() => dispatch(setUser(newUser))} />
-        </Modal>
-      ) : null}
+    <>
       <Formik
         validateOnChange={false}
         validateOnBlur={false}
@@ -70,7 +62,7 @@ export default function Signup() {
               });
             }
             dispatch(setUser(user));
-            setNewUser(user);
+            navigation.navigate("Home");
           } catch (e) {
             if (e && e.code === "USER_ALREADY_REGISTERED") {
               Toast.show({
@@ -205,6 +197,6 @@ export default function Signup() {
           );
         }}
       </Formik>
-    </div>
+    </>
   );
 }

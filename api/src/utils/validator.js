@@ -1,5 +1,5 @@
 const Joi = require("joi");
-
+const passwordValidator = require("password-validator");
 const idRegex = /^[0-9a-fA-F]{24}$/;
 
 function validateId(id) {

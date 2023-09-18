@@ -10,7 +10,7 @@ export default function GoToProfilButton() {
 
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("Profil")}>
+      <Pressable onPress={() => navigation.navigate("MemberProfil",{id:"1234"})}>
         <PiUserCirclePlusBold style={{ width: "40px", height: "40px" }} />
       </Pressable>
     </View>

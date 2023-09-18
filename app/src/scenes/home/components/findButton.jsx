@@ -10,7 +10,7 @@ export default function FindButton() {
 
   return (
     <View style={tailwind("bg-gray-500")}>
-      <Pressable onPress={() => navigation.navigate("Messagerie")}>
+      <Pressable onPress={() => navigation.navigate("Search")}>
         <BiSearch style={{ width: "30px", height: "30px",color:"white" }} />
       </Pressable>
     </View>

@@ -11,7 +11,7 @@ export default function Profilbutton() {
 
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("Profil")}>{route.name === "Profil" ? <FaUser style={style}/> : <FaRegUser style={style}/>}</Pressable>
+      <Pressable onPress={() => navigation.navigate("MyAccount")}>{route.name === "MyAccount" ? <FaUser style={style}/> : <FaRegUser style={style}/>}</Pressable>
     </View>
   );
 }

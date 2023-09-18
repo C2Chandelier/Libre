@@ -18,10 +18,10 @@ export default function Home() {
   const navigation = useNavigation();
   const tailwind = useTailwind();
 
-     const getMessage = async () => {
+  const getMessage = async () => {
     try {
-      const {ok, data} = await api.get(`/user`, navigation);
-      if(!ok) return;
+      const { ok, data } = await api.get(`/user`, navigation);
+      if (!ok) return;
       setData(data);
     } catch (e) {
       Toast.show({
@@ -33,27 +33,27 @@ export default function Home() {
   };
 
   const getUser = async (navigation) => {
-      try {
-        const res = await api.checkToken(navigation);
-        if (!res.ok || !res.user) {
-          console.log('res',res);
-          api.setToken(null);
-          dispatch(setUser(null));
-          navigation.navigate("Auth")
-        }
-        if (res.token) api.setToken(res.token);
-        if (res.user) dispatch(setUser(res.user));
-      } catch (e) {
-        console.log(e);
+    try {
+      const res = await api.checkToken(navigation);
+      if (!res.ok || !res.user) {
+        api.setToken(null);
+        dispatch(setUser(null));
+        navigation.navigate("Auth");
       }
+      if (res.token) api.setToken(res.token);
+      if (res.user) dispatch(setUser(res.user));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
-    getMessage();
     getUser(navigation);
+    if (user?._id !== null) getMessage();
   }, []);
-  console.log('user',user);
-  console.log(data);
+
+  console.log("user", user);
+  console.log("data", data);
 
   return (
     <View style={tailwind("flex h-full w-full")}>

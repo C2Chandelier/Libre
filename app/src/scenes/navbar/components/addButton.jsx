@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native";
 export default function AddButton() {
   const route = useRoute();
   const navigation = useNavigation();
-  const style = { width: "50px", height: "50px", color: route.name === "Messagerie" || route.name === "Profil" ? "black" : "white" };
+  const style = { width: "50px", height: "50px", color: route.name === "Messagerie" || route.name === "MyAccount" ? "black" : "white" };
 
   return (
     <View>

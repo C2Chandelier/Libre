@@ -9,7 +9,7 @@ export default function ShareButton() {
   const tailwind = useTailwind();
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("Profil")}>
+      <Pressable onPress={() => navigation.navigate("Share")}>
         <PiShareFatFill style={{ width: "40px", height: "40px" }} />
       </Pressable>
     </View>

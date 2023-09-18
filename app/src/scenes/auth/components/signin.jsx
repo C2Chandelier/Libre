@@ -15,8 +15,6 @@ export default function Signin() {
   const [userIsValid, setUserIsValid] = useState(true);
   const tailwind = useTailwind();
 
-  if (user) return navigation.navigate("Home");
-
   return (
     <>
       <Formik

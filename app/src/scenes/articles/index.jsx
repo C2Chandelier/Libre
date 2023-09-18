@@ -11,7 +11,7 @@ export default function Article() {
   return (
     <View style={tailwind("flex justify-center items-center")}>
       <Text style={tailwind("mt-[70px] mb-[10px] text-lg")}>TITRE BROOOOOOOOOOOOOOOOO</Text>
-      <Pressable onPress={() => navigation.navigate("Messagerie")}>
+      <Pressable onPress={() => navigation.navigate("Detail")}>
         <AiFillFileImage style={{width:"350px",height:"200px"}}/>
       </Pressable>
       <Text style={tailwind("mt-[20px] w-[90%] text-sm")}>

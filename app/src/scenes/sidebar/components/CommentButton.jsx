@@ -10,7 +10,7 @@ export default function CommentButton() {
 
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("Profil")}>
+      <Pressable onPress={() => navigation.navigate("Comment")}>
         <FaCommentDots style={{ width: "40px", height: "40px" }} />
       </Pressable>
     </View>
