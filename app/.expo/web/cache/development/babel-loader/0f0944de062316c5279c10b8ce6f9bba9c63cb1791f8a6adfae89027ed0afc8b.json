@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default Object.freeze({\n  name: 'DevLoadingView',\n  startObserving: function startObserving() {},\n  stopObserving: function stopObserving() {},\n  addListener: function addListener() {},\n  removeListeners: function removeListeners() {}\n});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

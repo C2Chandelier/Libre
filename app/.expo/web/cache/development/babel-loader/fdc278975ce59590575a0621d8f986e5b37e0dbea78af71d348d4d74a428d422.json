@@ -1,0 +1,1 @@
+{"ast":null,"code":"import * as React from 'react';\nimport Image from \"../../../../exports/Image\";\nimport createAnimatedComponent from \"../createAnimatedComponent\";\nexport default createAnimatedComponent(Image);","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

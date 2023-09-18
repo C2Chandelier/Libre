@@ -1,0 +1,1 @@
+{"ast":null,"code":"import createPrefixer from 'inline-style-prefixer/lib/createPrefixer';\nimport staticData from \"./static\";\nvar prefixAll = createPrefixer(staticData);\nexport default prefixAll;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

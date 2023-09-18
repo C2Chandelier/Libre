@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { useLocaleContext } from \"../../modules/useLocale\";\nexport default useLocaleContext;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

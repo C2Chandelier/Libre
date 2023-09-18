@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var KeepAwakeEventState;\n(function (KeepAwakeEventState) {\n  KeepAwakeEventState[\"RELEASE\"] = \"release\";\n})(KeepAwakeEventState || (KeepAwakeEventState = {}));","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var warnedKeys = {};\nexport function warnOnce(key, message) {\n  if (process.env.NODE_ENV !== 'production') {\n    if (warnedKeys[key]) {\n      return;\n    }\n    console.warn(message);\n    warnedKeys[key] = true;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

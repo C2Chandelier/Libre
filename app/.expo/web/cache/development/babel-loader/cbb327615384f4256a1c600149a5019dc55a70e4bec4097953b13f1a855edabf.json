@@ -1,0 +1,1 @@
+{"ast":null,"code":"import getNamedContext from \"../getNamedContext\";\nvar HeaderHeightContext = getNamedContext('HeaderHeightContext', undefined);\nexport default HeaderHeightContext;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

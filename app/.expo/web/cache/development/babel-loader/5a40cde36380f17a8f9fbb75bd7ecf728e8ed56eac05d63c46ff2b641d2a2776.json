@@ -1,0 +1,1 @@
+{"ast":null,"code":"export function upperBound(n, max) {\n  return n > max ? max : n;\n}\nexport function lowerBound(n, min) {\n  return n < min ? min : n;\n}\nexport function bound(n, min, max) {\n  return upperBound(lowerBound(n, min), max);\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

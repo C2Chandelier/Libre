@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Platform from \"react-native-web/dist/exports/Platform\";\nexport function isIOS() {\n  return Platform.OS === 'ios';\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

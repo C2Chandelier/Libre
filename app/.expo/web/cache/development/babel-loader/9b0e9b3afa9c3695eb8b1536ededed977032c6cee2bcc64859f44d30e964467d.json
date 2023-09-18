@@ -1,0 +1,1 @@
+{"ast":null,"code":"import FlatList from \"../../vendor/react-native/FlatList\";\nexport default FlatList;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Animated from \"../../vendor/react-native/Animated/Animated\";\nexport default Animated;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
