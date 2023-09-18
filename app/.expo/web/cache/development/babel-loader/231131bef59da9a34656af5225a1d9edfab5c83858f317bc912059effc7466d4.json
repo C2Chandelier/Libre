@@ -1,1 +1,0 @@
-{"ast":null,"code":"import * as TurboModuleRegistry from \"../TurboModule/TurboModuleRegistry\";\nexport default TurboModuleRegistry.get('NativeAnimatedTurboModule');","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function getHeaderTitle(options, fallback) {\n  return typeof options.headerTitle === 'string' ? options.headerTitle : options.title !== undefined ? options.title : fallback;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var PermissionStatus;\n(function (PermissionStatus) {\n  PermissionStatus[\"GRANTED\"] = \"granted\";\n  PermissionStatus[\"UNDETERMINED\"] = \"undetermined\";\n  PermissionStatus[\"DENIED\"] = \"denied\";\n})(PermissionStatus || (PermissionStatus = {}));","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

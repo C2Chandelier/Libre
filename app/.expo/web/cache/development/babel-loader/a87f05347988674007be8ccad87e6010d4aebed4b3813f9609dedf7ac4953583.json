@@ -1,1 +1,0 @@
-{"ast":null,"code":"var isDisabled = function isDisabled(props) {\n  return props.disabled || Array.isArray(props.accessibilityStates) && props.accessibilityStates.indexOf('disabled') > -1;\n};\nexport default isDisabled;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

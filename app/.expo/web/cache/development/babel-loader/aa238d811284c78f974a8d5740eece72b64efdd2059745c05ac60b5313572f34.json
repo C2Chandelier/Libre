@@ -1,1 +1,0 @@
-{"ast":null,"code":"'use strict';\n\nfunction clamp(min, value, max) {\n  if (value < min) {\n    return min;\n  }\n  if (value > max) {\n    return max;\n  }\n  return value;\n}\nmodule.exports = clamp;","map":null,"metadata":{},"sourceType":"script","externalDependencies":[]}

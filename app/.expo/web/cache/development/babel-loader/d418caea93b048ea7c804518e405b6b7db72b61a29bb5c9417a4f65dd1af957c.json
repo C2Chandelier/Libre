@@ -1,1 +1,0 @@
-{"ast":null,"code":"import UIManager from \"../UIManager\";\nvar NativeModules = {\n  UIManager: UIManager\n};\nexport default NativeModules;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

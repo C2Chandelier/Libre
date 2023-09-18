@@ -1,1 +1,0 @@
-{"ast":null,"code":"import * as React from 'react';\nvar NavigationContainerRefContext = React.createContext(undefined);\nexport default NavigationContainerRefContext;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

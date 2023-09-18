@@ -1,1 +1,0 @@
-{"ast":null,"code":"var isWebColor = function isWebColor(color) {\n  return color === 'currentcolor' || color === 'currentColor' || color === 'inherit' || color.indexOf('var(') === 0;\n};\nexport default isWebColor;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

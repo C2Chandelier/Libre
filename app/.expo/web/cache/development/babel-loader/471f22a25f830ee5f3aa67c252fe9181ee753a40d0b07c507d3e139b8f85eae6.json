@@ -1,1 +1,0 @@
-{"ast":null,"code":"var I18nManager = {\n  allowRTL: function allowRTL() {\n    return;\n  },\n  forceRTL: function forceRTL() {\n    return;\n  },\n  getConstants: function getConstants() {\n    return {\n      isRTL: false\n    };\n  }\n};\nexport default I18nManager;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

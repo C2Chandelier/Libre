@@ -1,1 +1,0 @@
-{"ast":null,"code":"var assets = [];\nexport function registerAsset(asset) {\n  return assets.push(asset);\n}\nexport function getAssetByID(assetId) {\n  return assets[assetId - 1];\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

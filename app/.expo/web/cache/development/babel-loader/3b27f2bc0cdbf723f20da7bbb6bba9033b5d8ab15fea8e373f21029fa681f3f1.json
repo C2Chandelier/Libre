@@ -1,1 +1,0 @@
-{"ast":null,"code":"import _createClass from \"@babel/runtime/helpers/createClass\";\nimport _classCallCheck from \"@babel/runtime/helpers/classCallCheck\";\nexport var PrivateValueStore = _createClass(function PrivateValueStore() {\n  _classCallCheck(this, PrivateValueStore);\n});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

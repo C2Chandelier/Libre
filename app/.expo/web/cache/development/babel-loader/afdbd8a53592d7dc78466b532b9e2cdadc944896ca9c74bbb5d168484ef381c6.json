@@ -1,1 +1,0 @@
-{"ast":null,"code":"function additiveInverseArray(arr) {\n  return arr.map(function (i) {\n    return -i;\n  });\n}\nexport { additiveInverseArray };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

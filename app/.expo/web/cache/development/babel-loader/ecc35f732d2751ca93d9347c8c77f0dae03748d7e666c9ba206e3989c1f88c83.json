@@ -1,1 +1,0 @@
-{"ast":null,"code":"import * as React from 'react';\nimport View from \"../../../../exports/View\";\nimport createAnimatedComponent from \"../createAnimatedComponent\";\nexport default createAnimatedComponent(View);","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
