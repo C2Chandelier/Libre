@@ -1,0 +1,1 @@
+{"ast":null,"code":"import reducers from \"./reducers\";\nimport * as Sentry from \"@sentry/react\";\nimport { configureStore } from \"@reduxjs/toolkit\";\nvar sentryReduxEnhancer = Sentry.createReduxEnhancer();\nexport default configureStore({\n  reducer: reducers,\n  enhancers: [sentryReduxEnhancer]\n});","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

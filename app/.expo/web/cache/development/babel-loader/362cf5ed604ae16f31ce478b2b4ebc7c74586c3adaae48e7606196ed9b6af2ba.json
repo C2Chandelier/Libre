@@ -1,0 +1,1 @@
+{"ast":null,"code":"import VirtualizedList from \"../../vendor/react-native/VirtualizedList\";\nexport default VirtualizedList;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

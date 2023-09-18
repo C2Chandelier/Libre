@@ -13,7 +13,7 @@ export default function FavoriteButton() {
 
   return (
     <View>
-      <Pressable onPress={() => setIsFavorite(true)}>
+      <Pressable onPress={() => setIsFavorite(!isFavorite)}>
         <AiFillStar style={style} />
       </Pressable>
     </View>

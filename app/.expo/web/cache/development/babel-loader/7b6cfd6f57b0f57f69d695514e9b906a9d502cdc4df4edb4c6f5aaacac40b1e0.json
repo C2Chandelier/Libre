@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { useEffect, useLayoutEffect } from 'react';\nimport canUseDOM from \"../canUseDom\";\nvar useLayoutEffectImpl = canUseDOM ? useLayoutEffect : useEffect;\nexport default useLayoutEffectImpl;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

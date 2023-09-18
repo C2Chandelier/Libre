@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from 'react';\nimport UnimplementedView from \"../../modules/UnimplementedView\";\nfunction YellowBox(props) {\n  return React.createElement(UnimplementedView, props);\n}\nYellowBox.ignoreWarnings = function () {};\nexport default YellowBox;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

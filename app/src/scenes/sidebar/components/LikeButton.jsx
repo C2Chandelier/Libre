@@ -13,7 +13,7 @@ export default function LikeButton() {
 
   return (
     <View>
-      <Pressable onPress={() => setIsLiked(true)}>
+      <Pressable onPress={() => setIsLiked(!isLiked)}>
         <PiHeartFill style={style}/>
       </Pressable>
     </View>

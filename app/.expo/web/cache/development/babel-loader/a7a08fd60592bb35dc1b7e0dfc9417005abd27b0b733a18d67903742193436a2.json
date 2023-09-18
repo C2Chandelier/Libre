@@ -1,0 +1,1 @@
+{"ast":null,"code":"var LogBox = {\n  ignoreLogs: function ignoreLogs() {},\n  ignoreAllLogs: function ignoreAllLogs() {},\n  uninstall: function uninstall() {},\n  install: function install() {}\n};\nexport default LogBox;","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
