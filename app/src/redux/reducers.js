@@ -1,5 +1,5 @@
 import { reducer as toastr } from "react-redux-toastr";
 
-import Auth from "./Auth/reducer"
+import auth from "./auth/reducer"
 
-export default { Auth, toastr };
+export default { auth, toastr };

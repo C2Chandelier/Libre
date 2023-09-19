@@ -1,8 +1,8 @@
-import api from "../../../services/api";
+import Api from "../../../services/api";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { setUser } from "../../../redux/Auth/actions";
+import { setUser } from "../../../redux/auth/actions";
 import Toast from "react-native-toast-message";
 import { Button } from "react-native";
 
@@ -12,7 +12,7 @@ export default function Logout() {
 
   async function logout() {
     try {
-      await api.post(`/user/logout`);
+      await Api.post(`/user/logout`);
       dispatch(setUser(null));
       Toast.show({
         type: "info",

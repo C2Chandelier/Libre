@@ -3,23 +3,29 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import validator from "validator";
-import { setUser } from "../../../redux/Auth/actions";
-import api from "../../../services/api";
+import { setUser } from "../../../redux/auth/actions";
+import Api from "../../../services/api";
 import { Button, Modal, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+//phone
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+//web
+//import DatePicker from "react-datepicker";
+//import "react-datepicker/dist/react-datepicker.css";
 
 export default function Signup() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const user = useSelector((state) => state.Auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   const regexPhoneFrenchCountries = /^((00|\+)(33|590|594|262|596|269|687|689|508|681)|0)[1-9]?(\d{8})$/;
 
   const BirthdateField = ({ field, form, ...props }) => {
-    return <DatePicker selected={field.value} onChange={(date) => form.setFieldValue(field.name, date)} {...props} />;
+    //web
+    //return <DatePicker selected={field.value} onChange={(date) => form.setFieldValue(field.name, date)} {...props} />;
+    //phone
+    return <DateTimePickerModal selected={field.value} onChange={(date) => form.setFieldValue(field.name, date)} {...props} mode="date" />;
   };
 
   return (
@@ -31,7 +37,7 @@ export default function Signup() {
         onSubmit={async (values, actions) => {
           try {
             const { firstName, lastName, email, password, phone, birthdateAt } = values?.user || {};
-            const { user, token, code, ok } = await api.post(`/user/signup`, {
+            const { user, token, code, ok } = await Api.post(`/user/signup`, {
               firstName,
               lastName,
               email,

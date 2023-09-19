@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Formik, Field, Form } from "formik";
-import { setUser } from "../../../redux/Auth/actions";
+import { setUser } from "../../../redux/auth/actions";
 import { useDispatch, useSelector } from "react-redux";
-import api from "../../../services/api";
+import Api from "../../../services/api";
 import Toast from "react-native-toast-message";
 import { Button } from "react-native";
-import { useTailwind } from "tailwind-rn";
 
 export default function Signin() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.Auth.user);
+  const user = useSelector((state) => state.auth.user);
   const [userIsValid, setUserIsValid] = useState(true);
-  const tailwind = useTailwind();
 
   return (
     <>
@@ -21,7 +19,7 @@ export default function Signin() {
         initialValues={{ email: "", password: "" }}
         onSubmit={async ({ email, password }, actions) => {
           try {
-            const { user, token, code } = await api.post(
+            const { user, token, code } = await Api.post(
               `/user/signin`,
               {
                 email,
@@ -29,7 +27,7 @@ export default function Signin() {
               },
               navigation,
             );
-            if (token) api.setToken(token);
+            if (token) Api.setToken(token);
             if (user) {
               dispatch(setUser(user));
               navigation.navigate("Home");
@@ -49,7 +47,7 @@ export default function Signin() {
         }}>
         {({ values, handleChange, handleSubmit }) => {
           return (
-            <Form onSubmit={handleSubmit} style={tailwind("bg-red-500")}>
+            <Form onSubmit={handleSubmit}>
               {!userIsValid && <div>E-mail et/ou mot de passe incorrect(s)</div>}
 
               <div>

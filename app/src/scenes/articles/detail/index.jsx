@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
-import Navbar from "../../navbar";
-import { useTailwind } from "tailwind-rn";
+import Navbar from "../../Navbar";
+import tw from "twrnc";
+
 
 export default function Detail() {
-  const tailwind = useTailwind();
   return (
-    <View style={tailwind("flex-1")}>
+    <View style={tw`flex-1`}>
       <Text>Detail ICI</Text>
-      <Navbar style={tailwind("absolute bottom-0 w-[100%] ")} />
+      <Navbar style={tw`absolute bottom-0 w-[100%] `} />
     </View>
   );
 }
