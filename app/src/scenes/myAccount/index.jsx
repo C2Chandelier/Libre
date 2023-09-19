@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Navbar from "../Navbar";
-import Logout from "../Auth/components/logout";
+import Logout from "../Auth/components/Logout";
 
 export default function MyAccount() {
 

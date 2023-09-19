@@ -11,6 +11,7 @@
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-community/hooks": "^3.0.0",
@@ -38,7 +39,8 @@
     "react-redux-toastr": "^7.6.11",
     "sentry": "^0.1.2",
     "twrnc": "^3.6.4",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

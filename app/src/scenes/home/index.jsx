@@ -8,7 +8,7 @@ import Toast from "react-native-toast-message";
 import { View } from "react-native";
 import Sidebar from "../Sidebar";
 import Articles from "../Articles";
-import FindButton from "./components/findButton";
+import FindButton from "./components/FindButton";
 import tw from "twrnc";
 
 export default function Home() {

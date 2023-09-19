@@ -1,14 +1,14 @@
-import { Field, Formik, Form } from "formik";
+import { Formik } from "formik";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
-import validator from "validator";
 import { setUser } from "../../../redux/auth/actions";
 import Api from "../../../services/api";
-import { Button, Modal, Text } from "react-native";
+import { Button, TextInput, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as yup from "yup";
 //phone
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+//import DateTimePickerModal from "react-native-modal-datetime-picker";
 //web
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
@@ -20,23 +20,38 @@ export default function Signup() {
   const user = useSelector((state) => state.auth.user);
 
   const regexPhoneFrenchCountries = /^((00|\+)(33|590|594|262|596|269|687|689|508|681)|0)[1-9]?(\d{8})$/;
+  const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-  const BirthdateField = ({ field, form, ...props }) => {
-    //web
-    //return <DatePicker selected={field.value} onChange={(date) => form.setFieldValue(field.name, date)} {...props} />;
-    //phone
-    return <DateTimePickerModal selected={field.value} onChange={(date) => form.setFieldValue(field.name, date)} {...props} mode="date" />;
-  };
+  const ValidationSchema = yup.object().shape({
+    email: yup.string().email("Please enter valid email").required("Email Address is Required"),
+    password: yup
+      .string()
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .matches(passwordRules, "password must contains at least 1 upper case letter, 1 lower case letter, 1 numeric digit")
+      .required("Password is required"),
+    firstName: yup.string().required("firstName is Required"),
+    lastName: yup.string().required("lastName is Required"),
+    phone: yup.string().matches(regexPhoneFrenchCountries, "Phone number is not valid").required("phone is required"),
+    birthdateAt: yup
+      .date()
+      .max(new Date(Date.now() - 441504000000), "You must be at least 14 years old")
+      .required("Birthdate is required"),
+    repassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .required("Please confirm your password"),
+  });
 
   return (
     <>
       <Formik
         validateOnChange={false}
         validateOnBlur={false}
-        initialValues={{ user: {} }}
+        validationSchema={ValidationSchema}
+        initialValues={{ email: "", password: "", firstName: "", lastName: "", phone: "", birthdateAt: "", repassword: "" }}
         onSubmit={async (values, actions) => {
           try {
-            const { firstName, lastName, email, password, phone, birthdateAt } = values?.user || {};
+            const { firstName, lastName, email, password, phone, birthdateAt } = values || {};
             const { user, token, code, ok } = await Api.post(`/user/signup`, {
               firstName,
               lastName,
@@ -87,7 +102,7 @@ export default function Signup() {
             console.log("e", e);
           }
         }}>
-        {({ values, errors, handleChange, handleSubmit }) => {
+        {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => {
           return (
             <div>
               <div>
@@ -95,109 +110,84 @@ export default function Signup() {
               </div>
 
               <div>
-                <Form onSubmit={handleSubmit}>
+                <View>
                   <div>
                     <label>
                       <span>*</span>ADRESSE EMAIL
                     </label>
-                    <Field
-                      validate={(v) => (!v && "Ce champ est obligatoire") || (!validator.isEmail(v) && "Veuillez renseigner votre email")}
-                      name="user.email"
-                      type="email"
-                      value={values.user.email || ""}
-                      onChange={handleChange}
-                      placeholder="Email"
-                    />
-                    <p>{errors.user?.email}</p>
+                    <TextInput name="email" textContentType="email" value={values.email} onChangeText={handleChange("email")} placeholder="Email" />
+                    {errors.email && touched.email && <Text style={{ fontSize: 10, color: "red" }}>{errors.email}</Text>}
                   </div>
                   <div>
                     <div>
                       <label htmlFor="firstName">
                         <span>*</span>Prénom
                       </label>
-                      <Field
-                        validate={(v) => !v && "Ce champ est obligatoire"}
-                        name="user.firstName"
-                        id="firstName"
-                        value={values.user.firstName || ""}
-                        onChange={handleChange}
-                        placeholder="Prénom"
-                      />
-                      <p>{errors.user?.firstName}</p>
+                      <TextInput name="firstName" value={values.firstName} onChangeText={handleChange("firstName")} placeholder="Prénom" />
+                      {errors.firstName && touched.firstName && <Text style={{ fontSize: 10, color: "red" }}>{errors.firstName}</Text>}
                     </div>
                     <div>
                       <label htmlFor="lastName">
                         <span>*</span>Nom
                       </label>
-                      <Field
-                        validate={(v) => !v && "Ce champ est obligatoire"}
-                        name="user.lastName"
-                        id="lastName"
-                        value={values.user.lastName || ""}
-                        onChange={handleChange}
-                        placeholder="Nom"
-                      />
-                      <p>{errors.user?.lastName}</p>
+                      <TextInput name="lastName" value={values.lastName} onChangeText={handleChange("lastName")} placeholder="Nom" />
+                      {errors.lastName && touched.lastName && <Text style={{ fontSize: 10, color: "red" }}>{errors.lastName}</Text>}
                     </div>
                   </div>
                   <div>
                     <label>
                       <span>*</span>Date de naissance
                     </label>
-                    <Field
-                      name="user.birthdateAt"
-                      component={BirthdateField}
-                      handleChange={handleChange}
+                    {/* For Web */}
+{/*                     <DatePicker
+                      name="birthdateAt"
+                      selected={values.birthdateAt}
+                      onChange={(newDate) => setFieldValue("birthdateAt", newDate)}
                       dateFormat="dd/MM/yyyy"
-                      showYearDropdown
-                      dropdownMode="select"
-                      placeholderText="Sélectionnez une date"
-                      selected={values.user.birthdateAt}
-                    />
-                    <p>{errors.user?.birthdateAt}</p>
+                      placeholderText="Select a date"
+                    /> */}
+                    {/* For Phone */}
+                    {/* a venir */}
+                    {errors.birthdateAt && touched.birthdateAt && <Text style={{ fontSize: 10, color: "red" }}>{errors.birthdateAt}</Text>}
                   </div>
                   <div>
                     <label htmlFor="phone">
                       <span>*</span>Téléphone
                     </label>
-                    <Field
-                      name="user.phone"
-                      type="tel"
-                      id="phone"
-                      value={values.user.phone || ""}
-                      onChange={handleChange}
-                      placeholder="06 00 00 00 00"
-                      validate={(v) =>
-                        !validator.matches(v, regexPhoneFrenchCountries) && "Le numéro de téléphone est au mauvais format. Format attendu : 06XXXXXXXX ou +33XXXXXXXX"
-                      }
-                    />
-                    <p>{errors.user?.phone}</p>
+                    <TextInput name="phone" value={values.phone} onChangeText={handleChange("phone")} placeholder="Phone" />
+                    {errors.phone && touched.phone && <Text style={{ fontSize: 10, color: "red" }}>{errors.phone}</Text>}
                   </div>
                   <div>
                     <label>
                       <span>*</span>Mot de passe
                     </label>
-                    <p>👉 Il doit contenir au moins 12 caractères, dont une majuscule, une minuscule, un chiffre et un symbole</p>
-                    <Field type="password" id="signup_password" value={values.user.password || ""} onChange={handleChange} name="user.password" placeholder="Mot de passe" />
-                    <p>{errors.user?.password}</p>
+                    <Text>👉 Il doit contenir au moins 8 caractères, dont une majuscule, une minuscule et un chiffre</Text>
+                    <TextInput
+                      name="password"
+                      textContentType="password"
+                      secureTextEntry={true}
+                      value={values.password}
+                      onChangeText={handleChange("password")}
+                      placeholder="Password"
+                    />
+                    {errors.password && touched.password && <Text style={{ fontSize: 10, color: "red" }}>{errors.password}</Text>}
                   </div>
                   <div>
                     <label>
                       <span>*</span>Confirmation mot de passe
                     </label>
-                    <Field
-                      validate={() => values.user.password !== values.user.repassword && "Les mots de passe ne correspondent pas."}
-                      type="password"
-                      id="repassword"
-                      value={values.user.repassword || ""}
-                      onChange={handleChange}
-                      name="user.repassword"
-                      placeholder="Confirmez votre mot de passe"
+                    <TextInput
+                      name="repassword"
+                      textContentType="password"
+                      secureTextEntry={true}
+                      value={values.repassword}
+                      onChangeText={handleChange("repassword")}
+                      placeholder="Confirm Password"
                     />
-                    <p>{errors.user?.repassword}</p>
+                    {errors.repassword && touched.repassword && <Text style={{ fontSize: 10, color: "red" }}>{errors.repassword}</Text>}
                   </div>
-                  <button type="submit">S'inscrire</button>
-                </Form>
+                  <Button title="S'inscrire" onPress={handleSubmit} />
+                </View>
               </div>
             </div>
           );

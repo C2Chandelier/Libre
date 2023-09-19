@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Formik, Field, Form } from "formik";
+import { Formik } from "formik";
 import { setUser } from "../../../redux/auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Api from "../../../services/api";
 import Toast from "react-native-toast-message";
-import { Button } from "react-native";
+import { Button, TextInput, View } from "react-native";
 
 export default function Signin() {
   const navigation = useNavigation();
@@ -47,27 +47,32 @@ export default function Signin() {
         }}>
         {({ values, handleChange, handleSubmit }) => {
           return (
-            <Form onSubmit={handleSubmit}>
+            <View>
               {!userIsValid && <div>E-mail et/ou mot de passe incorrect(s)</div>}
 
               <div>
                 <label htmlFor="email">E-mail</label>
-                <Field
-                  autoComplete="username"
-                  name="email"
-                  type="email"
-                  id="email"
-                  placeholder="Adresse e-mail"
-                  value={values.email}
-                  onChange={handleChange}
+                <TextInput 
+                autoComplete="username"
+                textContentType="email" 
+                placeholder="Adresse e-mail" 
+                value={values.email} 
+                onChangeText={handleChange('email')}
                 />
               </div>
               <div>
                 <label htmlFor="password">Mot de passe</label>
-                <Field autoComplete="password" name="password" type="password" id="signin_password" placeholder="Mot de passe" value={values.password} onChange={handleChange} />
+                <TextInput
+                  autoComplete="current-password"
+                  textContentType="password"
+                  placeholder="Mot de passe"
+                  secureTextEntry={true}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                />
               </div>
-              <button type="submit">Se Connecter</button>
-            </Form>
+              <Button onPress={handleSubmit} title="Se Connecter" />
+            </View>
           );
         }}
       </Formik>
