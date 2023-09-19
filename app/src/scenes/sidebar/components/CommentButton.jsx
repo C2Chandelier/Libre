@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Pressable } from "react-native";
-import {FaCommentDots} from "react-icons/fa"
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function CommentButton() {
   const navigation = useNavigation();
@@ -9,7 +9,7 @@ export default function CommentButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Comment")}>
-        <FaCommentDots style={{ width: "40px", height: "40px" }} />
+        <FontAwesome name="commenting" size={40} color="white" />
       </Pressable>
     </View>
   );

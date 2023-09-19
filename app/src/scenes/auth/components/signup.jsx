@@ -102,65 +102,53 @@ export default function Signup() {
             console.log("e", e);
           }
         }}>
-        {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => {
+        {({ values, errors, touched, handleChange, handleSubmit }) => {
           return (
-            <div>
-              <div>
-                Vous avez déjà un compte ? <Button title="Se Connecter" onPress={() => navigation.navigate("Signin")}></Button>
-              </div>
+            <View>
+              <View>
+                <Text>Vous avez déjà un compte ?</Text> <Button title="Se Connecter" onPress={() => navigation.navigate("Signin")}></Button>
+              </View>
 
-              <div>
+              <View>
                 <View>
-                  <div>
-                    <label>
-                      <span>*</span>ADRESSE EMAIL
-                    </label>
+                  <View>
+                    <Text>ADRESSE EMAIL</Text>
                     <TextInput name="email" textContentType="email" value={values.email} onChangeText={handleChange("email")} placeholder="Email" />
                     {errors.email && touched.email && <Text style={{ fontSize: 10, color: "red" }}>{errors.email}</Text>}
-                  </div>
-                  <div>
-                    <div>
-                      <label htmlFor="firstName">
-                        <span>*</span>Prénom
-                      </label>
+                  </View>
+                  <View>
+                    <View>
+                      <Text>PRÉNOM</Text>
                       <TextInput name="firstName" value={values.firstName} onChangeText={handleChange("firstName")} placeholder="Prénom" />
                       {errors.firstName && touched.firstName && <Text style={{ fontSize: 10, color: "red" }}>{errors.firstName}</Text>}
-                    </div>
-                    <div>
-                      <label htmlFor="lastName">
-                        <span>*</span>Nom
-                      </label>
+                    </View>
+                    <View>
+                      <Text>NOM</Text>
                       <TextInput name="lastName" value={values.lastName} onChangeText={handleChange("lastName")} placeholder="Nom" />
                       {errors.lastName && touched.lastName && <Text style={{ fontSize: 10, color: "red" }}>{errors.lastName}</Text>}
-                    </div>
-                  </div>
-                  <div>
-                    <label>
-                      <span>*</span>Date de naissance
-                    </label>
+                    </View>
+                  </View>
+                  <View>
+                    <Text>DATE DE NAISSANCE</Text>
                     {/* For Web */}
-{/*                     <DatePicker
-                      name="birthdateAt"
-                      selected={values.birthdateAt}
-                      onChange={(newDate) => setFieldValue("birthdateAt", newDate)}
-                      dateFormat="dd/MM/yyyy"
-                      placeholderText="Select a date"
-                    /> */}
+                    {/* <DatePicker
+            name="birthdateAt"
+            selected={values.birthdateAt}
+            onChange={(newDate) => setFieldValue("birthdateAt", newDate)}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a date"
+          /> */}
                     {/* For Phone */}
                     {/* a venir */}
                     {errors.birthdateAt && touched.birthdateAt && <Text style={{ fontSize: 10, color: "red" }}>{errors.birthdateAt}</Text>}
-                  </div>
-                  <div>
-                    <label htmlFor="phone">
-                      <span>*</span>Téléphone
-                    </label>
+                  </View>
+                  <View>
+                    <Text>PHONE</Text>
                     <TextInput name="phone" value={values.phone} onChangeText={handleChange("phone")} placeholder="Phone" />
                     {errors.phone && touched.phone && <Text style={{ fontSize: 10, color: "red" }}>{errors.phone}</Text>}
-                  </div>
-                  <div>
-                    <label>
-                      <span>*</span>Mot de passe
-                    </label>
+                  </View>
+                  <View>
+                    <Text>PASSWORD</Text>
                     <Text>👉 Il doit contenir au moins 8 caractères, dont une majuscule, une minuscule et un chiffre</Text>
                     <TextInput
                       name="password"
@@ -171,11 +159,9 @@ export default function Signup() {
                       placeholder="Password"
                     />
                     {errors.password && touched.password && <Text style={{ fontSize: 10, color: "red" }}>{errors.password}</Text>}
-                  </div>
-                  <div>
-                    <label>
-                      <span>*</span>Confirmation mot de passe
-                    </label>
+                  </View>
+                  <View>
+                    <Text>CONFIRM PASSWORD</Text>
                     <TextInput
                       name="repassword"
                       textContentType="password"
@@ -185,11 +171,11 @@ export default function Signup() {
                       placeholder="Confirm Password"
                     />
                     {errors.repassword && touched.repassword && <Text style={{ fontSize: 10, color: "red" }}>{errors.repassword}</Text>}
-                  </div>
+                  </View>
                   <Button title="S'inscrire" onPress={handleSubmit} />
                 </View>
-              </div>
-            </div>
+              </View>
+            </View>
           );
         }}
       </Formik>

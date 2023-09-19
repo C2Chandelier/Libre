@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Pressable } from "react-native";
-import {PiShareFatFill} from "react-icons/pi"
+import { Fontisto } from "@expo/vector-icons";
 
 export default function ShareButton() {
   const navigation = useNavigation();
@@ -9,7 +9,7 @@ export default function ShareButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Share")}>
-        <PiShareFatFill style={{ width: "40px", height: "40px" }} />
+        <Fontisto name="share-a" size={35} color="white" />
       </Pressable>
     </View>
   );

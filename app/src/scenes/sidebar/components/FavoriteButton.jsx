@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Pressable } from "react-native";
-import { AiFillStar } from "react-icons/ai";
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function FavoriteButton() {
   const navigation = useNavigation();
@@ -13,7 +14,7 @@ export default function FavoriteButton() {
   return (
     <View>
       <Pressable onPress={() => setIsFavorite(!isFavorite)}>
-        <AiFillStar style={style} />
+        {isFavorite ? <AntDesign name="star" size={40} color="yellow" /> : <Ionicons name="ios-bookmark" size={40} color="white" />}
       </Pressable>
     </View>
   );

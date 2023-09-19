@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { IoNewspaper, IoNewspaperOutline } from "react-icons/io5";
 import { useRoute } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ActuButton() {
   const navigation = useNavigation();
@@ -12,7 +12,7 @@ export default function ActuButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Actu")}>
-        {route.name === "Actu" ? <IoNewspaper style={style}/> : <IoNewspaperOutline style={style}/>}
+        {route.name === "Actu" ? <Ionicons name="newspaper" size={40} color="white" /> : <Ionicons name="newspaper-outline" size={40} color="black" />}
       </Pressable>
     </View>
   );

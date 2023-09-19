@@ -10,7 +10,7 @@ import tw from "twrnc";
 export default function Sidebar() {
 
   return (
-    <View style={tw`bg-gray-500 items-center justify-around h-full`}>
+    <View style={tw`bg-gray-500 justify-around h-full`}>
       <GoToProfilButton />
       <CommentButton />
       <LikeButton />

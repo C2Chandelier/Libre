@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Pressable } from "react-native";
-import {PiHeartFill} from "react-icons/pi"
+import { AntDesign } from "@expo/vector-icons";
 
 
 export default function LikeButton() {
@@ -12,7 +12,7 @@ export default function LikeButton() {
   return (
     <View>
       <Pressable onPress={() => setIsLiked(!isLiked)}>
-        <PiHeartFill style={style}/>
+        {isLiked ? <AntDesign name="heart" size={40} color="red" /> : <AntDesign name="heart" size={40} color="white" />}
       </Pressable>
     </View>
   );

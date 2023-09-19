@@ -65,7 +65,7 @@ export default function Home() {
       <View style={tw`absolute right-0 top-1/2 h-2/5 z-10 w-16`}>
         <Sidebar />
       </View>
-      <View style={tw`flex flex-row bg-gray-500 items-center justify-around h-16 absolute bottom-0 w-full`}>
+      <View style={tw`flex flex-row bg-gray-500 justify-around h-16 absolute bottom-0 w-full`}>
         <Navbar />
       </View>
     </View>

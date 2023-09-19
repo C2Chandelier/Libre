@@ -5,7 +5,7 @@ import { setUser } from "../../../redux/auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Api from "../../../services/api";
 import Toast from "react-native-toast-message";
-import { Button, TextInput, View } from "react-native";
+import { Button, TextInput, View, Text } from "react-native";
 
 export default function Signin() {
   const navigation = useNavigation();
@@ -48,20 +48,20 @@ export default function Signin() {
         {({ values, handleChange, handleSubmit }) => {
           return (
             <View>
-              {!userIsValid && <div>E-mail et/ou mot de passe incorrect(s)</div>}
+              {!userIsValid && <Text>E-mail et/ou mot de passe incorrect(s)</Text>}
 
-              <div>
-                <label htmlFor="email">E-mail</label>
+              <View>
+                <Text>EMAIL</Text>
                 <TextInput 
-                autoComplete="username"
+                autoComplete="email"
                 textContentType="email" 
                 placeholder="Adresse e-mail" 
                 value={values.email} 
                 onChangeText={handleChange('email')}
                 />
-              </div>
-              <div>
-                <label htmlFor="password">Mot de passe</label>
+              </View>
+              <View>
+                <Text>PASSWORD</Text>
                 <TextInput
                   autoComplete="current-password"
                   textContentType="password"
@@ -70,7 +70,7 @@ export default function Signin() {
                   value={values.password}
                   onChangeText={handleChange('password')}
                 />
-              </div>
+              </View>
               <Button onPress={handleSubmit} title="Se Connecter" />
             </View>
           );

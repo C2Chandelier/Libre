@@ -1,17 +1,17 @@
 import React from "react";
 import { View, Pressable, Text} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {AiFillFileImage} from "react-icons/ai"
+import { Entypo } from "@expo/vector-icons";
 import tw from "twrnc";
 
 export default function Article() {
   const navigation = useNavigation();
 
   return (
-    <View style={tw`flex justify-center items-center"`}>
+    <View style={tw`flex justify-center`}>
       <Text style={tw`mt-[70px] mb-[10px] text-lg`}>TITRE BROOOOOOOOOOOOOOOOO</Text>
       <Pressable onPress={() => navigation.navigate("Detail")}>
-        <AiFillFileImage style={{width:"350px",height:"200px"}}/>
+        <Entypo name="image-inverted" size={200} color="black" />
       </Pressable>
       <Text style={tw`mt-[20px] w-[90%] text-sm`}>
         Une exoplanète et une formidable nébuleuse : le 12 juillet, de nouvelles images du télescope spatial James Webb ont été dévoilées par la NASA, révélant la beauté et

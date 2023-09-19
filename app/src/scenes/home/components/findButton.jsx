@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { BiSearch } from "react-icons/bi";
+import { Entypo } from "@expo/vector-icons";
 
 export default function FindButton() {
   const navigation = useNavigation();
@@ -9,7 +9,7 @@ export default function FindButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Search")}>
-        <BiSearch />
+        <Entypo name="magnifying-glass" size={32} color="black" />
       </Pressable>
     </View>
   );
