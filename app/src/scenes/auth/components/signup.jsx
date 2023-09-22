@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import { setUser } from "../../../redux/auth/actions";
 import Api from "../../../services/api";
-import { Button, TextInput, View, Text } from "react-native";
+import { Button, TextInput, View, Text, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 import moment from "moment";
@@ -105,7 +105,7 @@ export default function Signup() {
         }}>
         {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => {
           return (
-            <View style={tw`flex absolute bottom-0 w-full`}>
+            <SafeAreaView style={tw`flex absolute bottom-0 w-full`}>
               <View>
                 <Text>Vous avez déjà un compte ?</Text>
                 <Button title="Se Connecter" onPress={() => navigation.navigate("Signin")}></Button>
@@ -175,7 +175,7 @@ export default function Signup() {
                 </View>
                 <Button title="S'inscrire" onPress={handleSubmit} />
               </View>
-            </View>
+            </SafeAreaView>
           );
         }}
       </Formik>

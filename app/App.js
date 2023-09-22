@@ -41,7 +41,6 @@ export default function App() {
             <Stack.Screen name="MemberProfil" component={MemberProfil} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
-        <Toast />
     </Provider>
   );
 }

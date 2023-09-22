@@ -5,7 +5,7 @@ import { setUser } from "../../../redux/auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Api from "../../../services/api";
 import Toast from "react-native-toast-message";
-import { Button, TextInput, View, Text } from "react-native";
+import { Button, TextInput, View, Text, SafeAreaView } from "react-native";
 import tw from "twrnc";
 
 
@@ -17,7 +17,7 @@ export default function Signin() {
 
 
   return (
-    <View style={tw`flex absolute bottom-0 w-full`}>
+    <SafeAreaView style={tw`flex absolute bottom-0 w-full`}>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async ({ email, password }, actions) => {
@@ -74,6 +74,6 @@ export default function Signin() {
         }}
       </Formik>
       <Button title="S'inscrire" onPress={() => navigation.navigate("Signup")} ></Button>
-    </View>
+    </SafeAreaView>
   );
 }
