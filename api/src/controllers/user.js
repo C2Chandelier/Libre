@@ -6,15 +6,17 @@ const UserModel = require("../models/user");
 const { serializeUser } = require("../utils/serializer");
 const AuthObject = require("../auth");
 const UserAuth = new AuthObject(UserModel);
-const { canViewAllUsers } = require("../lib/ROLES");
+const { canViewAllUsers } = require("../utils/ROLES");
+const { ERRORS } = require("../utils");
 
-router.get("/", passport.authenticate("user", { session: false, failWithError: true }), async (req, res) => {
+router.get("/", passport.authenticate(["user","admin"], { session: false, failWithError: true }), async (req, res) => {
   try {
-    if (!canViewAllUsers(req.user)) return res.status(403).send({ ok: false, code: "OPERATION_UNAUTHORIZED" });
+    if (!canViewAllUsers(req.user)) return res.status(403).send({ ok: false, code: ERRORS.OPERATION_UNAUTHORIZED });
     const data = await UserModel.find({ deletedAt: { $exists: false } });
     return res.status(200).send({ ok: true, data: data.map(serializeUser) });
   } catch (error) {
-    res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+    console.log(error)
+    res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
   }
 });
 
@@ -31,7 +33,7 @@ router.post("/logout", passport.authenticate("user", { session: false, failWithE
     await UserAuth.logout(req, res);
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+    return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
   }
 });
 

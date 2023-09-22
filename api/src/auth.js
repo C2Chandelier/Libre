@@ -4,6 +4,7 @@ const { serializeAdmin, serializeUser } = require("./utils/serializer");
 const config = require("./config");
 const { isUser, isAdmin, cookieOptions } = require("./utils");
 const { validateFirstName, validatePassword } = require("./utils/validator");
+const { ERRORS } = require("./utils");
 
 class Auth {
   constructor(model) {
@@ -17,7 +18,7 @@ class Auth {
     })
       .unknown()
       .validate(req.body);
-    if (error) return res.status(400).send({ ok: false, code: "EMAIL_AND_PASSWORD_REQUIRED" });
+    if (error) return res.status(400).send({ ok: false, code: ERRORS.EMAIL_AND_PASSWORD_REQUIRED });
     const { password, email } = value;
     try {
       const user = await this.model.findOne({
@@ -25,11 +26,11 @@ class Auth {
         deletedAt: { $exists: false },
       });
 
-      if (!user || user.status === "DELETED") return res.status(401).send({ ok: false, code: "EMAIL_OR_PASSWORD_INVALID" });
+      if (!user || user.status === "DELETED") return res.status(401).send({ ok: false, code: ERRORS.EMAIL_OR_PASSWORD_INVALID });
 
       const match = await user.comparePassword(password);
       if (!match) {
-        return res.status(401).send({ ok: false, code: "EMAIL_OR_PASSWORD_INVALID" });
+        return res.status(401).send({ ok: false, code: ERRORS.EMAIL_OR_PASSWORD_INVALID });
       }
       user.set({ lastLoginAt: Date.now() });
       await user.save();
@@ -53,7 +54,7 @@ class Auth {
       });
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+      return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
     }
   }
 
@@ -69,15 +70,15 @@ class Auth {
       }).validate(req.body);
 
       if (error) {
-        if (error.details[0].path.find((e) => e === "email")) return res.status(400).send({ ok: false, user: null, code: "EMAIL_INVALID" });
+        if (error.details[0].path.find((e) => e === "email")) return res.status(400).send({ ok: false, user: null, code: ERRORS.EMAIL_INVALID });
         if (error.details[0].path.find((e) => e === "password"))
           return res.status(400).send({
             ok: false,
             user: null,
-            code: "PASSWORD_NOT_VALIDATED",
+            code: ERRORS.PASSWORD_NOT_VALIDATED,
           });
         console.log(error);
-        return res.status(400).send({ ok: false, code: "INVALID_PARAMS" });
+        return res.status(400).send({ ok: false, code: ERRORS.INVALID_PARAMS });
       }
 
       const { email, firstName, lastName, password, phone, birthdateAt } = value;
@@ -85,7 +86,7 @@ class Auth {
         return res.status(400).send({
           ok: false,
           user: null,
-          code: "PASSWORD_NOT_VALIDATED",
+          code: ERRORS.PASSWORD_NOT_VALIDATED,
         });
 
       const formatedDate = birthdateAt;
@@ -94,7 +95,7 @@ class Auth {
       let countDocuments = await this.model.countDocuments({
         email,
       });
-      if (countDocuments > 0) return res.status(409).send({ ok: false, code: "USER_ALREADY_REGISTERED" });
+      if (countDocuments > 0) return res.status(409).send({ ok: false, code: ERRORS.USER_ALREADY_REGISTERED });
 
       const user = await this.model.create({
         email,
@@ -119,8 +120,8 @@ class Auth {
       });
     } catch (error) {
       console.log("Error ", error);
-      if (error.code === 11000) return res.status(409).send({ ok: false, code: "USER_ALREADY_REGISTERED" });
-      return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+      if (error.code === 11000) return res.status(409).send({ ok: false, code: ERORS.USER_ALREADY_REGISTERED });
+      return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
     }
   }
 
@@ -141,7 +142,7 @@ class Auth {
     }).validate({
       token: tokenAccess
     });
-    if (error) return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+    if (error) return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
 
     try {
       const { user } = req;
@@ -151,7 +152,7 @@ class Auth {
       res.send({ ok: true, token: token, user: data, data });
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+      return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
     }
   }
 }

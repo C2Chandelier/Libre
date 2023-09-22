@@ -21,6 +21,7 @@ export default function Home() {
       if (!ok) return;
       setData(data);
     } catch (e) {
+      console.log(e);
       Toast.show({
         type: "error",
         text1: `Oups, une erreur est survenue lors de la recuperation des messages`,
@@ -32,7 +33,6 @@ export default function Home() {
   const getUser = async (navigation) => {
     try {
       const res = await Api.checkToken(navigation);
-      console.log("res", res);
       if (!res.ok || !res.user) {
         Api.setToken(null);
         dispatch(setUser(null));
@@ -43,6 +43,11 @@ export default function Home() {
       if (res.token && res.user) getMessage();
     } catch (e) {
       console.log(e);
+      Toast.show({
+        type: "error",
+        text1: `Oups, une erreur est survenue lors de la recuperation de l'utilisateurs`,
+        duration: 5000,
+      });
     }
   };
 
@@ -50,11 +55,15 @@ export default function Home() {
     getUser(navigation);
   }, []);
   useEffect(() => {
-    if (user) getMessage();
+    if (user) {
+      getMessage();
+      Toast.show({
+        type: "info",
+        text1: `Bienvenue ${user.firstName}`,
+        duration: 1000,
+      });
+    }
   }, [user]);
-
-  console.log("user", user);
-  console.log("data", data);
 
   return (
     <SafeAreaView style={tw`w-full h-full bg-red-500`}>

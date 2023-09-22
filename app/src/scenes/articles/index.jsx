@@ -18,7 +18,7 @@ export default function Article() {
 
   return (
     <SafeAreaView style={tw`flex flex-col`}>
-      <View style={tw`absolute right-0 z-10 mr-5 mt-8`}>
+      <View style={tw`absolute right-0 z-10 mr-5 mt-4`}>
         <FindButton />
       </View>
       <ScrollView style={tw`mb-16`}>
@@ -59,7 +59,7 @@ export default function Article() {
       </Modal>
       {!isCommentOpen && !isShareOpen ? (
         <>
-          <View style={tw`absolute right-0 top-2/5 h-1/2 z-10 w-16`}>
+          <View style={tw`absolute right-0 top-2/5 h-1/2 z-10 w-14`}>
             <Sidebar userId={userId} postId={postId} setIsCommentOpen={setIsCommentOpen} setIsShareOpen={setIsShareOpen} />
           </View>
           <View style={tw`flex flex-row bg-black justify-around h-16 absolute bottom-0 w-full`}>

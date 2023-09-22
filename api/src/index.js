@@ -20,6 +20,8 @@ app.use(passport.initialize());
 
 app.use("/user", require("./controllers/user"));
 app.use("/admin", require("./controllers/admin"));
+app.use("/article", require("./controllers/article"));
+
 
 require("./passport")();
 

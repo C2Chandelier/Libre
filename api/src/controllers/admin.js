@@ -6,16 +6,19 @@ const AdminModel = require("../models/admin");
 const { serializeAdmin } = require("../utils/serializer");
 const AuthObject = require("../auth");
 const AdminAuth = new AuthObject(AdminModel);
-const { canViewAllAdmins } = require("../lib/ROLES");
+const { canViewAllAdmins } = require("../utils/ROLES");
+const { ERRORS } = require("../utils");
+
 
 router.get("/", passport.authenticate("admin", { session: false, failWithError: true }), async (req, res) => {
   try {
     //seul les modérateurs peuvent voir tous les admins
-    if (!canViewAllAdmins(req.user)) return res.status(403).send({ ok: false, code: "OPERATION_UNAUTHORIZED" });
+    if (!canViewAllAdmins(req.user)) return res.status(403).send({ ok: false, code: ERRORS.OPERATION_UNAUTHORIZED });
     const data = await AdminModel.find({ deletedAt: { $exists: false } });
     return res.status(200).send({ ok: true, data: data.map(serializeAdmin) });
   } catch (error) {
-    res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+    console.log(error)
+    res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
   }
 });
 
@@ -32,7 +35,7 @@ router.post("/logout", passport.authenticate("admin", { session: false, failWith
     await AdminAuth.logout(req, res);
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
+    return res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
   }
 });
 

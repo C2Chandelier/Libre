@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, SafeAreaView, Modal, Pressable } from "react-native";
-import Navbar from "../../../Navbar";
 import Sidebar from "../../../Sidebar";
 import Comment from "../../../Comment";
 import Share from "../../../Share";

@@ -50,9 +50,16 @@ const Schema = new mongoose.Schema({
   role: {
     type: String,
     default: "admin",
+    enum: ["admin"],
     documentation: {
       description: "role",
     },
+  },
+  status: {
+    type: String,
+    default: "active",
+    enum: ["ative", "inactive"],
+    documentation: { description: "status" },
   },
 
   createdAt: { type: Date, default: Date.now },
@@ -65,6 +72,7 @@ Schema.pre("save", async function (next) {
     const hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
   }
+  this.updatedAt = Date.now();
   return next();
 });
 

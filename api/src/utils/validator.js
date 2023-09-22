@@ -18,16 +18,13 @@ function validatePassword(password) {
   const schema = new passwordValidator();
   schema
     .is()
-    .min(12) // Minimum length 12
+    .min(8) // Minimum length 12
     .has()
     .uppercase() // Must have uppercase letters
     .has()
     .lowercase() // Must have lowercase letters
     .has()
     .digits() // Must have digits
-    .has()
-    .symbols(); // Must have symbols
-
   return schema.validate(password);
 }
 

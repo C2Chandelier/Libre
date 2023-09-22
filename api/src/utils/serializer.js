@@ -1,3 +1,5 @@
+const { isUser, isAdmin } = require(".");
+
 function serializeUser(user) {
   return user.toObject({
     transform: (_doc, ret) => {
@@ -16,7 +18,19 @@ function serializeAdmin(admin) {
   });
 }
 
+function serializeArticle(article, user) {
+  return article.toObject({
+    transform: (_doc, ret) => {
+      if (isUser(user)) {
+        delete ret.updatedAt.by;
+      }
+      return ret;
+    },
+  });
+}
+
 module.exports = {
   serializeUser,
   serializeAdmin,
+  serializeArticle,
 };
