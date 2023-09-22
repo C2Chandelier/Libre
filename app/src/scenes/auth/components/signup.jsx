@@ -7,15 +7,14 @@ import Api from "../../../services/api";
 import { Button, TextInput, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
-//phone
-//import DateTimePickerModal from "react-native-modal-datetime-picker";
-//web
-//import DatePicker from "react-datepicker";
-//import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+import tw from "twrnc";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function Signup() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -41,6 +40,8 @@ export default function Signup() {
       .oneOf([yup.ref("password"), null], "Passwords must match")
       .required("Please confirm your password"),
   });
+
+  const errorStyle = { fontSize: 10, color: "red" };
 
   return (
     <>
@@ -102,78 +103,77 @@ export default function Signup() {
             console.log("e", e);
           }
         }}>
-        {({ values, errors, touched, handleChange, handleSubmit }) => {
+        {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => {
           return (
-            <View>
+            <View style={tw`flex absolute bottom-0 w-full`}>
               <View>
-                <Text>Vous avez déjà un compte ?</Text> <Button title="Se Connecter" onPress={() => navigation.navigate("Signin")}></Button>
+                <Text>Vous avez déjà un compte ?</Text>
+                <Button title="Se Connecter" onPress={() => navigation.navigate("Signin")}></Button>
               </View>
-
               <View>
                 <View>
-                  <View>
-                    <Text>ADRESSE EMAIL</Text>
-                    <TextInput name="email" textContentType="email" value={values.email} onChangeText={handleChange("email")} placeholder="Email" />
-                    {errors.email && touched.email && <Text style={{ fontSize: 10, color: "red" }}>{errors.email}</Text>}
-                  </View>
-                  <View>
-                    <View>
-                      <Text>PRÉNOM</Text>
-                      <TextInput name="firstName" value={values.firstName} onChangeText={handleChange("firstName")} placeholder="Prénom" />
-                      {errors.firstName && touched.firstName && <Text style={{ fontSize: 10, color: "red" }}>{errors.firstName}</Text>}
-                    </View>
-                    <View>
-                      <Text>NOM</Text>
-                      <TextInput name="lastName" value={values.lastName} onChangeText={handleChange("lastName")} placeholder="Nom" />
-                      {errors.lastName && touched.lastName && <Text style={{ fontSize: 10, color: "red" }}>{errors.lastName}</Text>}
-                    </View>
-                  </View>
-                  <View>
-                    <Text>DATE DE NAISSANCE</Text>
-                    {/* For Web */}
-                    {/* <DatePicker
-            name="birthdateAt"
-            selected={values.birthdateAt}
-            onChange={(newDate) => setFieldValue("birthdateAt", newDate)}
-            dateFormat="dd/MM/yyyy"
-            placeholderText="Select a date"
-          /> */}
-                    {/* For Phone */}
-                    {/* a venir */}
-                    {errors.birthdateAt && touched.birthdateAt && <Text style={{ fontSize: 10, color: "red" }}>{errors.birthdateAt}</Text>}
-                  </View>
-                  <View>
-                    <Text>PHONE</Text>
-                    <TextInput name="phone" value={values.phone} onChangeText={handleChange("phone")} placeholder="Phone" />
-                    {errors.phone && touched.phone && <Text style={{ fontSize: 10, color: "red" }}>{errors.phone}</Text>}
-                  </View>
-                  <View>
-                    <Text>PASSWORD</Text>
-                    <Text>👉 Il doit contenir au moins 8 caractères, dont une majuscule, une minuscule et un chiffre</Text>
-                    <TextInput
-                      name="password"
-                      textContentType="password"
-                      secureTextEntry={true}
-                      value={values.password}
-                      onChangeText={handleChange("password")}
-                      placeholder="Password"
-                    />
-                    {errors.password && touched.password && <Text style={{ fontSize: 10, color: "red" }}>{errors.password}</Text>}
-                  </View>
-                  <View>
-                    <Text>CONFIRM PASSWORD</Text>
-                    <TextInput
-                      name="repassword"
-                      textContentType="password"
-                      secureTextEntry={true}
-                      value={values.repassword}
-                      onChangeText={handleChange("repassword")}
-                      placeholder="Confirm Password"
-                    />
-                    {errors.repassword && touched.repassword && <Text style={{ fontSize: 10, color: "red" }}>{errors.repassword}</Text>}
-                  </View>
-                  <Button title="S'inscrire" onPress={handleSubmit} />
+                  <Text>ADRESSE EMAIL</Text>
+                  <TextInput name="email" textContentType="email" value={values.email} onChangeText={handleChange("email")} placeholder="Email" />
+                  {errors.email && touched.email ? <Text style={errorStyle}>{errors.email}</Text> : null}
                 </View>
+
+                <View>
+                  <View>
+                    <Text>PRÉNOM</Text>
+                    <TextInput name="firstName" value={values.firstName} onChangeText={handleChange("firstName")} placeholder="Prénom" />
+                    {errors.firstName && touched.firstName ? <Text style={errorStyle}>{errors.firstName}</Text> : null}
+                  </View>
+                  <View>
+                    <Text>NOM</Text>
+                    <TextInput name="lastName" value={values.lastName} onChangeText={handleChange("lastName")} placeholder="Nom" />
+                    {errors.lastName && touched.lastName ? <Text style={errorStyle}>{errors.lastName}</Text> : null}
+                  </View>
+                </View>
+                <View>
+                  <Text>DATE DE NAISSANCE</Text>
+                  <Text onPress={() => setDatePickerVisibility(true)}>{values.birthdateAt ? moment(values.birthdateAt).format("YYYY-MM-DD") : "select date"}</Text>
+                  <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={(date) => {
+                      setFieldValue("birthdateAt", moment(date).format("YYYY-MM-DD"));
+                      setDatePickerVisibility(false);
+                    }}
+                    onCancel={() => setDatePickerVisibility(false)}
+                  />
+                  {errors.birthdateAt && touched.birthdateAt ? <Text style={errorStyle}>{errors.birthdateAt}</Text> : null}
+                </View>
+                <View>
+                  <Text>PHONE</Text>
+                  <TextInput name="phone" value={values.phone} onChangeText={handleChange("phone")} placeholder="Phone" />
+                  {errors.phone && touched.phone ? <Text style={errorStyle}>{errors.phone}</Text> : null}
+                </View>
+                <View>
+                  <Text>PASSWORD</Text>
+                  <Text>👉 Il doit contenir au moins 8 caractères, dont une majuscule, une minuscule et un chiffre</Text>
+                  <TextInput
+                    name="password"
+                    textContentType="password"
+                    secureTextEntry={true}
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    placeholder="Password"
+                  />
+                  {errors.password && touched.password ? <Text style={errorStyle}>{errors.password}</Text> : null}
+                </View>
+                <View>
+                  <Text>CONFIRM PASSWORD</Text>
+                  <TextInput
+                    name="repassword"
+                    textContentType="password"
+                    secureTextEntry={true}
+                    value={values.repassword}
+                    onChangeText={handleChange("repassword")}
+                    placeholder="Confirm Password"
+                  />
+                  {errors.repassword && touched.repassword ? <Text style={errorStyle}>{errors.repassword}</Text> : null}
+                </View>
+                <Button title="S'inscrire" onPress={handleSubmit} />
               </View>
             </View>
           );

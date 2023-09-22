@@ -22,6 +22,7 @@ export default function Logout() {
       navigation.navigate("Auth");
     } catch (e) {
       console.log(e);
+      navigation.navigate("Auth");
       Toast.show({
         type: "error",
         text1: `Une erreur est survenue`,

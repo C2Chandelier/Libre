@@ -9,7 +9,7 @@ import tw from "twrnc";
 
 export default function Navbar() {
   return (
-    <View style={tw`flex flex-row bg-gray-500 justify-around w-full`}>
+    <View style={tw`flex flex-row justify-around items-center w-full`}>
       <HomeButton />
       <ActuButton />
       <AddButton />

@@ -5,11 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { setUser } from "../../redux/auth/actions";
 import Toast from "react-native-toast-message";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Sidebar from "../Sidebar";
 import Articles from "../Articles";
 import FindButton from "./components/FindButton";
 import tw from "twrnc";
+import { Platform } from "react-native";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -34,6 +35,7 @@ export default function Home() {
   const getUser = async (navigation) => {
     try {
       const res = await Api.checkToken(navigation);
+      console.log("res", res);
       if (!res.ok || !res.user) {
         Api.setToken(null);
         dispatch(setUser(null));
@@ -41,7 +43,7 @@ export default function Home() {
       }
       if (res.token) Api.setToken(res.token);
       if (res.user) dispatch(setUser(res.user));
-      if(res.token && res.user) getMessage();
+      if (res.token && res.user) getMessage();
     } catch (e) {
       console.log(e);
     }
@@ -50,6 +52,9 @@ export default function Home() {
   useEffect(() => {
     getUser(navigation);
   }, []);
+  useEffect(() => {
+    if (user) getMessage();
+  }, [user]);
 
   console.log("user", user);
   console.log("data", data);
@@ -59,13 +64,13 @@ export default function Home() {
       <View style={tw`absolute right-0 z-10 mr-5 mt-5`}>
         <FindButton />
       </View>
-      <View style={tw`w-full h-full bg-red-500`}>
+      <View style={tw`w-full h-[91%] bg-red-500`}>
         <Articles />
       </View>
-      <View style={tw`absolute right-0 top-1/2 h-2/5 z-10 w-16`}>
+      <View style={tw`absolute right-0 top-[45%] h-2/5 z-10 w-16`}>
         <Sidebar />
       </View>
-      <View style={tw`flex flex-row bg-gray-500 justify-around h-16 absolute bottom-0 w-full`}>
+      <View style={tw`flex flex-row bg-black justify-around h-16 absolute bottom-0 w-full`}>
         <Navbar />
       </View>
     </View>

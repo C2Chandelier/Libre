@@ -12,7 +12,7 @@ export default function ActuButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Actu")}>
-        {route.name === "Actu" ? <Ionicons name="newspaper" size={40} color="white" /> : <Ionicons name="newspaper-outline" size={40} color="black" />}
+        {route.name === "Actu" ? <Ionicons name="newspaper" size={40} color="white" /> : <Ionicons name="newspaper-outline" size={40} color="gray" />}
       </Pressable>
     </View>
   );

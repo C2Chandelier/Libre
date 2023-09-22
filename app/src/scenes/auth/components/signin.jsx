@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Api from "../../../services/api";
 import Toast from "react-native-toast-message";
 import { Button, TextInput, View, Text } from "react-native";
+import tw from "twrnc";
+
 
 export default function Signin() {
   const navigation = useNavigation();
@@ -13,8 +15,9 @@ export default function Signin() {
   const user = useSelector((state) => state.auth.user);
   const [userIsValid, setUserIsValid] = useState(true);
 
+
   return (
-    <>
+    <View style={tw`flex absolute bottom-0 w-full`}>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async ({ email, password }, actions) => {
@@ -48,17 +51,11 @@ export default function Signin() {
         {({ values, handleChange, handleSubmit }) => {
           return (
             <View>
-              {!userIsValid && <Text>E-mail et/ou mot de passe incorrect(s)</Text>}
+              {!userIsValid ? <Text>E-mail et/ou mot de passe incorrect(s)</Text> : null}
 
               <View>
                 <Text>EMAIL</Text>
-                <TextInput 
-                autoComplete="email"
-                textContentType="email" 
-                placeholder="Adresse e-mail" 
-                value={values.email} 
-                onChangeText={handleChange('email')}
-                />
+                <TextInput autoComplete="email" textContentType="emailAddress" placeholder="Adresse e-mail" value={values.email} onChangeText={handleChange("email")} />
               </View>
               <View>
                 <Text>PASSWORD</Text>
@@ -68,7 +65,7 @@ export default function Signin() {
                   placeholder="Mot de passe"
                   secureTextEntry={true}
                   value={values.password}
-                  onChangeText={handleChange('password')}
+                  onChangeText={handleChange("password")}
                 />
               </View>
               <Button onPress={handleSubmit} title="Se Connecter" />
@@ -76,7 +73,7 @@ export default function Signin() {
           );
         }}
       </Formik>
-      <Button title="S'inscrire" onPress={() => navigation.navigate("Signup")}></Button>
-    </>
+      <Button title="S'inscrire" onPress={() => navigation.navigate("Signup")} ></Button>
+    </View>
   );
 }

@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 const Joi = require("joi");
 const { serializeAdmin, serializeUser } = require("./utils/serializer");
 const config = require("./config");
@@ -50,7 +49,7 @@ class Auth {
         ok: true,
         token,
         user: data,
-        data,
+        code: 'ok'
       });
     } catch (error) {
       console.log(error);
@@ -136,10 +135,11 @@ class Auth {
   }
 
   async signinToken(req, res) {
+    const tokenAccess = req.hostname === "localhost" ? req.cookies.jwt : req.headers.authorization.substring(4);
     const { error, value } = Joi.object({
       token: Joi.string(),
     }).validate({
-      token: req.cookies.jwt,
+      token: tokenAccess
     });
     if (error) return res.status(500).send({ ok: false, code: "SERVER_ERROR" });
 

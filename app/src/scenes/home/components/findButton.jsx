@@ -9,7 +9,7 @@ export default function FindButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Search")}>
-        <Entypo name="magnifying-glass" size={32} color="black" />
+        <Entypo name="magnifying-glass" size={32} color="white" />
       </Pressable>
     </View>
   );

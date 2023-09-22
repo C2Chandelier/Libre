@@ -15,7 +15,7 @@ export default function Chatbutton() {
         {route.name === "Chat" ? (
           <Ionicons name="md-chatbox-ellipses-sharp" size={40} color="white" />
         ) : (
-          <Ionicons name="md-chatbox-ellipses-outline" size={40} color="black" />
+          <Ionicons name="md-chatbox-ellipses-outline" size={40} color="gray" />
         )}
       </Pressable>
     </View>
