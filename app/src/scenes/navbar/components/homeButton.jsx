@@ -12,7 +12,7 @@ export default function HomeButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Home")}>
-        {route.name === "Home" ? <Entypo name="home" size={40} color="white" /> : <AntDesign name="home" size={40} color="black" />}
+        {route.name === "Home" ? <Entypo name="home" size={40} color="white" /> : <AntDesign name="home" size={40} color="gray" />}
       </Pressable>
     </View>
   );

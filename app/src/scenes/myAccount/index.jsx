@@ -1,16 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import Navbar from "../Navbar";
 import Logout from "../Auth/components/Logout";
 import tw from "twrnc";
 
 export default function MyAccount() {
-
   return (
-    <View style={tw`flex absolute bottom-0 w-full`}>
+    <SafeAreaView style={tw`flex h-full w-full`}>
       <Text>PROFIL ICI</Text>
       <Logout />
-      <Navbar />
-    </View>
+      <View style={tw`flex flex-row bg-white border-t border-slate-400 justify-around h-16 absolute bottom-0 w-full`}>
+        <Navbar />
+      </View>
+    </SafeAreaView>
   );
 }

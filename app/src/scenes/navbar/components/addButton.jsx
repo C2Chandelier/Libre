@@ -11,11 +11,7 @@ export default function AddButton() {
   return (
     <View>
       <Pressable onPress={() => navigation.navigate("Ajoute")}>
-        {route.name === "Chat" || route.name === "MyAccount" ? (
-          <MaterialIcons name="add-box" size={50} color="black" />
-        ) : (
-          <MaterialIcons name="add-box" size={50} color="white" />
-        )}
+        {route.name === "Chat" || route.name === "MyAccount" ? <MaterialIcons name="add-box" size={50} color="black" /> : <MaterialIcons name="add-box" size={50} color="white" />}
       </Pressable>
     </View>
   );

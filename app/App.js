@@ -14,7 +14,7 @@ import Ajoute from "./src/scenes/Add";
 import Chat from "./src/scenes/Chat";
 import Share from "./src/scenes/Share";
 import Comment from "./src/scenes/Comment";
-import Detail from "./src/scenes/Articles/Detail";
+import Detail from "./src/scenes/Articles/components/Detail";
 import Search from "./src/scenes/Search";
 import MemberProfil from "./src/scenes/MemberProfil";
 import MyAccount from "./src/scenes/MyAccount";

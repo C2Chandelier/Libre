@@ -3,12 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function CommentButton() {
-  const navigation = useNavigation();
-
+export default function CommentButton({ setIsCommentOpen }) {
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("Comment")}>
+      <Pressable onPress={() => setIsCommentOpen(true)}>
         <FontAwesome name="commenting" size={40} color="white" />
       </Pressable>
     </View>

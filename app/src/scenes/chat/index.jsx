@@ -1,12 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import Navbar from "../Navbar";
+import tw from "twrnc";
 
 export default function Chat() {
   return (
-    <View>
+    <SafeAreaView style={tw`flex h-full w-full`}>
       <Text>MESSAGERIE ICI</Text>
-      <Navbar />
-    </View>
+      <View style={tw`flex flex-row bg-white border-t border-slate-400 justify-around h-16 absolute bottom-0 w-full`}>
+        <Navbar />
+      </View>
+    </SafeAreaView>
   );
 }

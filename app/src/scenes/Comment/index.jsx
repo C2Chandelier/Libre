@@ -1,12 +1,18 @@
 import React from "react";
-import { View, Text } from "react-native";
-import Navbar from "../Navbar";
+import { View, Text, Pressable, SafeAreaView } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
-export default function Comment() {
+export default function Comment({ setIsCommentOpen, postId }) {
   return (
-    <View>
+    <SafeAreaView>
+      <Pressable
+        onPress={() => {
+          setIsCommentOpen(false);
+          console.log(postId);
+        }}>
+        <Entypo name="cross" size={24} color="black" />
+      </Pressable>
       <Text>Comment ICI</Text>
-      <Navbar />
-    </View>
+    </SafeAreaView>
   );
 }

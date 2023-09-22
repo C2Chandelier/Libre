@@ -1,13 +1,18 @@
 import React from "react";
-import { View, Text } from "react-native";
-import Navbar from "../Navbar";
+import { View, Text, Pressable, SafeAreaView } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
-export default function Share() {
-
+export default function Share({ setIsShareOpen, postId }) {
   return (
-    <View>
+    <SafeAreaView>
+      <Pressable
+        onPress={() => {
+          setIsShareOpen(false);
+          console.log(postId);
+        }}>
+        <Entypo name="cross" size={24} color="black" />
+      </Pressable>
       <Text>Share ICI</Text>
-      <Navbar/>
-    </View>
+    </SafeAreaView>
   );
 }

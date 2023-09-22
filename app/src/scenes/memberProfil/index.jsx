@@ -1,16 +1,21 @@
 import React from "react";
-import { View, Text } from "react-native";
-import Navbar from "../Navbar";
+import { View, Text, SafeAreaView, Pressable } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import tw from "twrnc";
+import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function MemberProfil() {
-    const route = useRoute();
-    const { id } = route.params;
-    console.log(id)
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { userId } = route.params;
+  console.log(userId);
   return (
-    <View>
-      <Text>PROFIL de membre ICI</Text>
-      <Navbar />
-    </View>
+    <SafeAreaView style={tw`flex h-full w-full`}>
+      <Pressable onPress={() => navigation.goBack()}>
+        <AntDesign name="left" size={24} color="black" />
+      </Pressable>
+      <Text>PROFIL MEMBRE ICI</Text>
+    </SafeAreaView>
   );
 }

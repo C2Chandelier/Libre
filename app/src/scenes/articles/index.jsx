@@ -1,17 +1,40 @@
-import React from "react";
-import { View, Pressable, Text, ScrollView, SafeAreaView} from "react-native";
+import React, { useState } from "react";
+import { View, Pressable, Text, ScrollView, SafeAreaView, Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
+import Navbar from "../Navbar";
 import tw from "twrnc";
+import Sidebar from "../Sidebar";
+import FindButton from "./components/FindButton";
+import Comment from "../Comment";
+import Share from "../Share";
 
 export default function Article() {
   const navigation = useNavigation();
+  const postId = "1111";
+  const userId = "2222";
+  const [isCommentOpen, setIsCommentOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   return (
     <SafeAreaView style={tw`flex flex-col`}>
-      <ScrollView>
+      <View style={tw`absolute right-0 z-10 mr-5 mt-8`}>
+        <FindButton />
+      </View>
+      <ScrollView style={tw`mb-16`}>
         <Text style={tw`mx-auto text-xl mt-16`}>TITRE BROOOOOOOOOOOOOOOOO</Text>
-        <Pressable onPress={() => navigation.navigate("Detail")} style={tw`mx-auto`}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate(
+              "Detail",
+
+              {
+                postId: postId,
+                userId: userId,
+              },
+            )
+          }
+          style={tw`mx-auto`}>
           <Entypo name="image-inverted" size={220} color="black" />
         </Pressable>
         <Text style={tw`ml-2 w-[90%] text-base pr-2 pb-5`}>
@@ -24,6 +47,26 @@ export default function Article() {
           de leur cocon de poussière.
         </Text>
       </ScrollView>
+      <Modal visible={isCommentOpen} transparent={true} animationType="slide">
+        <View style={tw`bg-white absolute bottom-0 w-full h-3/4`}>
+          <Comment setIsCommentOpen={setIsCommentOpen} postId={postId} />
+        </View>
+      </Modal>
+      <Modal visible={isShareOpen} transparent={true} animationType="slide">
+        <View style={tw`bg-white absolute bottom-0 w-full h-2/5`}>
+          <Share setIsShareOpen={setIsShareOpen} postId={postId} />
+        </View>
+      </Modal>
+      {!isCommentOpen && !isShareOpen ? (
+        <>
+          <View style={tw`absolute right-0 top-2/5 h-1/2 z-10 w-16`}>
+            <Sidebar userId={userId} postId={postId} setIsCommentOpen={setIsCommentOpen} setIsShareOpen={setIsShareOpen} />
+          </View>
+          <View style={tw`flex flex-row bg-black justify-around h-16 absolute bottom-0 w-full`}>
+            <Navbar />
+          </View>
+        </>
+      ) : null}
     </SafeAreaView>
   );
 }
