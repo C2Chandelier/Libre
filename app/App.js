@@ -3,8 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Api, { initApi } from "./src/services/api";
 import { Provider } from "react-redux";
-import Toast from "react-native-toast-message";
-
+import "react-native-gesture-handler";
 
 import Home from "./src/scenes/Home";
 import Auth from "./src/scenes/Auth";
@@ -26,7 +25,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <Provider store={Store}>
-        <NavigationContainer>
+      <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Stack.Screen name="Auth" component={Auth} options={{ headerShown: false }} />
@@ -40,7 +39,7 @@ export default function App() {
             <Stack.Screen name="MyAccount" component={MyAccount} options={{ headerShown: false }} />
             <Stack.Screen name="MemberProfil" component={MemberProfil} options={{ headerShown: false }} />
           </Stack.Navigator>
-        </NavigationContainer>
+      </NavigationContainer>
     </Provider>
   );
 }

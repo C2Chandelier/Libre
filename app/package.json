@@ -35,6 +35,7 @@
     "react-icons": "^4.10.1",
     "react-native": "0.72.4",
     "react-native-datepicker": "^1.7.2",
+    "react-native-gesture-handler": "~2.12.0",
     "react-native-hooks": "^0.9.0",
     "react-native-modal-datetime-picker": "^17.1.0",
     "react-native-paper": "^5.10.6",
