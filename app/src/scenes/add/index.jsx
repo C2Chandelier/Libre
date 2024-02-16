@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import Api from "../../services/api";
 import { Button, TextInput, View, Text, SafeAreaView, Pressable } from "react-native";
@@ -9,7 +9,7 @@ import * as yup from "yup";
 import tw from "twrnc";
 import { canCreateArticle } from "../../utils/ROLES";
 import { Entypo } from "@expo/vector-icons";
-
+import * as Notifications from "expo-notifications";
 
 export default function Add() {
   const navigation = useNavigation();
@@ -40,10 +40,12 @@ export default function Add() {
         initialValues={{ theme: "", category: "", title: "", image: "", content: "" }}
         onSubmit={async (values, actions) => {
           if (!canCreateArticle(user)) {
-            Toast.show({
-              type: "error",
-              text1: "Vous etes bannis",
-              duration: 10000,
+            await Notifications.scheduleNotificationAsync({
+              content: {
+                title: "ban",
+                body: `Vous etes bannis`,
+              },
+              trigger: null,
             });
             return;
           }
@@ -58,17 +60,21 @@ export default function Add() {
             });
             if (!ok) {
               if (code === "INVALID_PARAMS") {
-                Toast.show({
-                  type: "error",
-                  text1: "verifier les champs",
-                  duration: 10000,
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: "verif",
+                    body: `Vérifiez vos informations`,
+                  },
+                  trigger: null,
                 });
               }
               if (code === "OPERATION_UNAUTHORIZED") {
-                Toast.show({
-                  type: "error",
-                  text1: "Vous etes bannis",
-                  duration: 10000,
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: "ban",
+                    body: `Vous etes bannis`,
+                  },
+                  trigger: null,
                 });
               }
               Toast.show({

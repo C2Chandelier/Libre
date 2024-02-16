@@ -8,13 +8,11 @@ import Toast from "react-native-toast-message";
 import { Button, TextInput, View, Text, SafeAreaView } from "react-native";
 import tw from "twrnc";
 
-
 export default function Signin() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [userIsValid, setUserIsValid] = useState(true);
-
 
   return (
     <SafeAreaView style={tw`flex absolute bottom-0 w-full`}>
@@ -73,7 +71,7 @@ export default function Signin() {
           );
         }}
       </Formik>
-      <Button title="S'inscrire" onPress={() => navigation.navigate("Signup")} ></Button>
+      <Button title="S'inscrire" onPress={() => navigation.navigate("Signup")}></Button>
     </SafeAreaView>
   );
 }

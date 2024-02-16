@@ -5,20 +5,27 @@ import { useNavigation } from "@react-navigation/native";
 import { setUser } from "../../../redux/auth/actions";
 import Toast from "react-native-toast-message";
 import { Button } from "react-native";
+import * as Notifications from "expo-notifications";
 
 export default function Logout() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const sendPushNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Log out",
+        body: `Vous avez bien été déconnecté`,
+      },
+      trigger: null,
+    });
+  };
+
   async function logout() {
     try {
       await Api.post(`/user/logout`);
       dispatch(setUser(null));
-      Toast.show({
-        type: "info",
-        text1: `Vous avez bien été déconnecté`,
-        duration: 10000,
-      });
+      sendPushNotification();
       navigation.navigate("Auth");
     } catch (e) {
       console.log(e);

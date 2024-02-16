@@ -38,7 +38,7 @@ export default function Detail() {
         </View>
       </Modal>
       {!isCommentOpen && !isShareOpen ? (
-        <View style={tw`bg-black justify-around h-16 absolute bottom-0 w-full`}>
+        <View style={tw`bg-black justify-around h-20 absolute bottom-0 w-full`}>
           <Sidebar userId={userId} postId={postId} setIsCommentOpen={setIsCommentOpen} setIsShareOpen={setIsShareOpen} />
         </View>
       ) : null}

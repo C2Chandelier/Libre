@@ -35,20 +35,6 @@ router.get("/:id", passport.authenticate(["user", "admin"], { session: false, fa
   }
 });
 
-/* // ici on ne prend que les messages destinés à un role précis
-router.get("/", passport.authenticate("referent", { session: false, failWithError: true }), async (req, res) => {
-  try {
-    if (!canReadAlerteMessage(req.user)) return res.status(403).send({ ok: false, code: ERRORS.OPERATION_UNAUTHORIZED });
-
-    const data = await AlerteMessageModel.find({ to_role: { $in: [req.user.role] }, deletedAt: { $exists: false } });
-    if (!data) return res.status(404).send({ ok: false, code: ERRORS.NOT_FOUND });
-    return res.status(200).send({ ok: true, data: data.map(serializeAlerteMessage) });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ ok: false, code: ERRORS.SERVER_ERROR });
-  }
-}); */
-
 router.post("/", passport.authenticate(["user", "admin"], { session: false, failWithError: true }), async (req, res) => {
   try {
     const { error, value } = Joi.object({
@@ -110,7 +96,7 @@ router.put("/:id", passport.authenticate(["user", "admin"], { session: false, fa
   }
 });
 
-router.delete("/:id", passport.authenticate(["user","admin"], { session: false, failWithError: true }), async (req, res) => {
+router.delete("/:id", passport.authenticate(["user", "admin"], { session: false, failWithError: true }), async (req, res) => {
   try {
     const { error, value: id } = validateId(req.params.id);
     if (error) {

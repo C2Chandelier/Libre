@@ -10,7 +10,11 @@ export default function Profilbutton() {
 
   return (
     <View>
-      <Pressable onPress={() => navigation.navigate("MyAccount")}>
+      <Pressable
+        onPress={() => {
+          navigation.removeListener;
+          navigation.navigate("MyAccount");
+        }}>
         {route.name === "MyAccount" ? <FontAwesome5 name="user-alt" size={40} color="black" /> : <FontAwesome5 name="user" size={40} color="gray" />}
       </Pressable>
     </View>

@@ -7,7 +7,7 @@ export default function Actu() {
   return (
     <SafeAreaView style={tw`flex h-full w-full`}>
       <Text>ACTU ICI</Text>
-      <View style={tw`flex flex-row bg-black justify-around h-16 absolute bottom-0 w-full`}>
+      <View style={tw`flex flex-row bg-black justify-around h-20 absolute bottom-0 w-full`}>
         <Navbar />
       </View>
     </SafeAreaView>

@@ -55,10 +55,16 @@ const Schema = new mongoose.Schema({
       description: "role",
     },
   },
+  avatar: {
+    type: String,
+    documentation: {
+      description: "avatar",
+    },
+  },
   status: {
     type: String,
     default: "active",
-    enum: ["ative","banned","inactive"],
+    enum: ["active", "banned", "inactive"],
     documentation: { description: "status" },
   },
 

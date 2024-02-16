@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { setUser } from "../../redux/auth/actions";
 import Toast from "react-native-toast-message";
-import { SafeAreaView, View } from "react-native";
 import Articles from "../Articles";
 import tw from "twrnc";
-import { Platform } from "react-native";
+import { SafeAreaView, Text } from "react-native";
+import * as Notifications from "expo-notifications";
+import Navbar from "../Navbar";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -51,23 +52,25 @@ export default function Home() {
     }
   };
 
+  const sendPushNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Bienvenue",
+        body: `Bienvenue ${user.firstName}`,
+      },
+      trigger: null,
+    });
+  };
+
   useEffect(() => {
     getUser(navigation);
   }, []);
   useEffect(() => {
     if (user) {
       getMessage();
-      Toast.show({
-        type: "info",
-        text1: `Bienvenue ${user.firstName}`,
-        duration: 1000,
-      });
+      sendPushNotification();
     }
   }, [user]);
 
-  return (
-    <SafeAreaView style={tw`w-full h-full bg-red-500`}>
-      <Articles />
-    </SafeAreaView>
-  );
+  return <Articles />;
 }

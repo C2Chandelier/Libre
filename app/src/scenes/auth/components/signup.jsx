@@ -10,6 +10,7 @@ import * as yup from "yup";
 import moment from "moment";
 import tw from "twrnc";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import * as Notifications from "expo-notifications";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -63,18 +64,21 @@ export default function Signup() {
             });
             if (!ok) {
               if (code === "PASSWORD_NOT_VALIDATED") {
-                Toast.show({
-                  type: "error",
-                  text1: "Mot de passe incorrect",
-                  text2: "Votre mot de passe doit contenir au moins 12 caractères, dont une majuscule, une minuscule, un chiffre et un symbole",
-                  duration: 10000,
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: "mdp",
+                    body: `Votre mot de passe doit contenir au moins 12 caractères, dont une majuscule, une minuscule, un chiffre et un symbole`,
+                  },
+                  trigger: null,
                 });
               }
               if (code === "USER_ALREADY_REGISTERED") {
-                Toast.show({
-                  type: "error",
-                  text1: "Votre compte est déja activé. Veuillez vous connecter",
-                  duration: 10000,
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: "activate",
+                    body: `Votre compte est déja activé. Veuillez vous connecter`,
+                  },
+                  trigger: null,
                 });
               }
               Toast.show({
@@ -87,10 +91,12 @@ export default function Signup() {
             navigation.navigate("Home");
           } catch (e) {
             if (e && e.code === "USER_ALREADY_REGISTERED") {
-              Toast.show({
-                type: "error",
-                text1: "Le compte existe déja. Veuillez vous connecter",
-                duration: 2000,
+              await Notifications.scheduleNotificationAsync({
+                content: {
+                  title: "already",
+                  body: `Le compte existe déja. Veuillez vous connecter`,
+                },
+                trigger: null,
               });
             }
 
